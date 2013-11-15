@@ -11,7 +11,7 @@ class FileUploader < CarrierWave::Uploader::Base
     storage :fog
     
     def cache_dir
-      "#{Rails.root.to_s}/tmp/uploads" if ENV['HEROKU'] == 'true'
+      "#{Rails.root.to_s}/tmp/uploads"
     end
   else
     storage :file
