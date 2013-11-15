@@ -9,6 +9,10 @@ class FileUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader
   if ENV['S3_KEY']
     storage :fog
+
+    CarrierWave.configure do |config|
+      config.fog_use_ssl_for_aws = false
+    end
     
     def cache_dir
       "#{Rails.root.to_s}/tmp/uploads"
