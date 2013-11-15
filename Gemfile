@@ -8,12 +8,13 @@ end
 
 gem 'rails', '3.2.14'
 
+gem 'debugger'
 gem 'authlogic'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
 gem 'mime-types', :require => 'mime/types'
-gem 'carrierwave', '0.6.1'
+gem 'carrierwave', '0.9.0'
 
 # -- Database
 # SQLite:
@@ -22,9 +23,9 @@ group :development do
 end
 group :production do
   # MySQL:
-  #gem 'mysql2'
+  gem 'mysql2'
   # PostgreSQL (default on heroku):
-  gem 'pg'
+  # gem 'pg'
 end
 
 # -- Cloud storage
