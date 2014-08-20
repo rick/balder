@@ -18,8 +18,16 @@ Collection.all.sort_by(&:title).each do |collection|
     album.photos.sort_by(&:created_at).each_with_index do |photo,p|
       photo_path = File.join(album_path, File.basename(photo.file.path))
       puts "    --> Processing photo #{p+1}/#{photo_count}: [#{photo_path}]"
-      written = File.open(photo_path, "wb") { |f| f.write photo.file.read }
-      puts "          (wrote #{written} bytes)"
+      if File.exists?(photo_path)
+	puts "          ... skipping existing file ..."
+      else
+	begin
+          written = File.open(photo_path, "wb") { |f| f.write photo.file.read }
+          puts "          (wrote #{written} bytes)"
+	rescue => boom
+          puts " * * * * ERROR WRITING FILE [#{photo_path}]: #{boom.message} * * * * "
+        end
+      end
     end
   end
 end
